@@ -1,4 +1,4 @@
-# Postman for Cisco SD-WAN 19.x
+# Postman for Cisco SD-WAN
 
 This public repo contains a [POSTMAN](https://getpostman.com) [environment](Cisco-SD-WAN-Environment.postman_environment.json) and [collection](Cisco-SD-WAN.postman_collection.json) that can be used to interact with the `Cisco SD-WAN 19.2 vManage REST API`. The environment is pre-configured to access the [Cisco DevNet: Cisco SD-WAN 19.2 Always On Sandbox for SD-WAN](https://sandbox-sdwan-1.cisco.com) fabric. You can edit the variables in the environment to point to your own vManage instance.
 
@@ -8,8 +8,6 @@ This collection only includes calls to read (GET) information from the environme
 
 - Authenticate
   - Credentials provided in the [environment](Cisco-SD-WAN-Environment.postman_environment.json) are for the Always On environment.
-  - Obtain X-XSRF-TOKEN to protect against [Cross-Site Request Forgery](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/sdwan-xe-gs-book/cisco-sd-wan-API-cross-site-request-forgery-prevention.html)
-    - Required for SD-WAN 19.2 and later. The collection automatically stores the token for later calls.
 - List devices that are part of the SD-WAN fabric and show device status, counters, and interface statistics for all the interfaces in the fabric.
 - List device templates
 - List device policy
@@ -18,7 +16,7 @@ This collection only includes calls to read (GET) information from the environme
     - Includes an undocumented endpoint (`/dataservice/data/device/state/CEdgeInterface`) for obtaining a list of all interfaces on Cisco IOS XE Routers including i.e. Cisco ISR and also cloud hosted CSR devices.
   - Statistics [Bulk Statistics API Documentation](https://sdwan-docs.cisco.com/Product_Documentation/Command_Reference/Command_Reference/vManage_REST_APIs/Bulk_APIs/Statistics)
     - _Data lags real-time by ~20mins_
-- Real-Time monitoring [Real-Time Monitoring API Docuumentation](https://sdwan-docs.cisco.com/Product_Documentation/Command_Reference/Command_Reference/vManage_REST_APIs/Real-Time_Monitoring_APIs)
+- Real-Time monitoring [Real-Time Monitoring API Documentation](https://sdwan-docs.cisco.com/Product_Documentation/Command_Reference/Command_Reference/vManage_REST_APIs/Real-Time_Monitoring_APIs)
 
 Feel free to modify them as you see fit and to add more calls to the collection.
 
@@ -27,8 +25,9 @@ Feel free to modify them as you see fit and to add more calls to the collection.
 The Postman collection and environment will need:
 
 - Postman 6.4.4+
-- Cisco SD-WAN powered by Viptela vManage 19.x or later
-- If using version 18.x, the API uses port `8443` instead of the standard port `443`. This collection _should_ work with an 18.x environment if the environment variable `port` is set.
+- Cisco SD-WAN vManage 18.x or later
+  - If using version 18.x, the API uses port `8443` instead of the standard port `443`. This collection _should_ work with an 18.x environment if the environment variable `port` is set.
+  - If using version 19.2 or later, after authenticating with a username and password, another request is required to obtain a X-XSRF-TOKEN to protect against [Cross-Site Request Forgery](https://www.cisco.com/c/en/us/td/docs/routers/sdwan/configuration/sdwan-xe-gs-book/cisco-sd-wan-API-cross-site-request-forgery-prevention.html). When using this collection the token is automatically stored in a postman environment variable and used with further requests.
 
 ## Setup
 
